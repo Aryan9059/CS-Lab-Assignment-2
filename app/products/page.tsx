@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { products } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
@@ -49,12 +50,12 @@ export default async function ProductsPage({
 
             {/* Clear search */}
             {query && (
-              <a
+              <Link
                 href="/products"
                 className="text-sm text-[#4A1080] hover:underline font-medium"
               >
                 Clear search &times;
-              </a>
+              </Link>
             )}
           </div>
         </div>
@@ -69,12 +70,12 @@ export default async function ProductsPage({
             <p className="text-[#6B7280] text-sm mb-6">
               Try searching for diyas, rangoli, sweets, lanterns, or gifts.
             </p>
-            <a
+            <Link
               href="/products"
               className="inline-flex items-center gap-2 bg-[#4A1080] hover:bg-[#320A5E] text-white font-semibold px-6 py-3 rounded-full transition-colors"
             >
               Browse all products
-            </a>
+            </Link>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

@@ -29,6 +29,7 @@ export default function ProductDetailPage({ params }: Props) {
   if (!product) notFound();
 
   function handleAdd() {
+    if (!product) return;
     addToCart(product, qty);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
