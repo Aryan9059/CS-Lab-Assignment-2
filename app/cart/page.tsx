@@ -47,13 +47,18 @@ export default function CartPage() {
     setCouponLoading(true);
 
     try {
-      // ⚠️ VULNERABILITY: sends the already-discounted total every time.
-      // The server never checks how many times SAVE20 was applied.
+      const normalizedCode = couponCode.trim().toUpperCase();
+      
+      // if (couponLog.includes(normalizedCode)) {
+      //   setCouponError("This coupon code has already been applied.");
+      //   return;
+      // }
+ 
       const res = await fetch("/api/coupon", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          code: couponCode.trim().toUpperCase(),
+          code: normalizedCode,
           currentTotal,
         }),
       });
