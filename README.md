@@ -218,5 +218,4 @@ A full screen-capture video with voiceover narration covering:
 2. Live attack demonstration (coupon stacking)
 3. Technical explanation of the flaw and the fix
 
-![Business Logic Flaw Demo](./public/Assignment_2_CS_Demo.mp4) <br>
 Link to video: https://drive.google.com/file/d/1G67HPX2iBjpXuTNgmQ2MBYIE5ZkfOaCT/view?usp=sharing
