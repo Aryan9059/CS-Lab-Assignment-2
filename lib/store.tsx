@@ -18,6 +18,7 @@ export interface CartItem {
 
 export interface CouponLogEntry {
   application: number;
+  code: string;
   before: number;
   after: number;
   saved: number;
@@ -33,7 +34,7 @@ type CartAction =
   | { type: "ADD_ITEM"; product: Product; quantity: number }
   | { type: "REMOVE_ITEM"; productId: string }
   | { type: "UPDATE_QTY"; productId: string; quantity: number }
-  | { type: "APPLY_DISCOUNT"; newTotal: number }
+  | { type: "APPLY_DISCOUNT"; newTotal: number; code: string }
   | { type: "CLEAR_COUPON" }
   | { type: "HYDRATE"; state: CartState };
 
@@ -48,7 +49,7 @@ interface CartContextValue {
   addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
   updateQty: (productId: string, quantity: number) => void;
-  applyDiscount: (newTotal: number) => void;
+  applyDiscount: (newTotal: number, code: string) => void;
   clearCoupon: () => void;
 }
 
@@ -103,6 +104,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       const saved = parseFloat((before - after).toFixed(2));
       const entry: CouponLogEntry = {
         application: state.couponLog.length + 1,
+        code: action.code,
         before,
         after,
         saved,
@@ -173,8 +175,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       dispatch({ type: "REMOVE_ITEM", productId }),
     updateQty: (productId, quantity) =>
       dispatch({ type: "UPDATE_QTY", productId, quantity }),
-    applyDiscount: (newTotal) =>
-      dispatch({ type: "APPLY_DISCOUNT", newTotal }),
+    applyDiscount: (newTotal, code) =>
+      dispatch({ type: "APPLY_DISCOUNT", newTotal, code }),
     clearCoupon: () => dispatch({ type: "CLEAR_COUPON" }),
   };
 

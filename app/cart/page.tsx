@@ -49,7 +49,7 @@ export default function CartPage() {
     try {
       const normalizedCode = couponCode.trim().toUpperCase();
       
-      // if (couponLog.includes(normalizedCode)) {
+      // if (couponLog.some((entry) => Object.values(entry).some((value) => value === normalizedCode))) {
       //   setCouponError("This coupon code has already been applied.");
       //   return;
       // }
@@ -65,7 +65,7 @@ export default function CartPage() {
       const data = await res.json();
 
       if (data.valid) {
-        applyDiscount(data.newTotal);
+        applyDiscount(data.newTotal, normalizedCode);
         setCouponError("");
       } else {
         setCouponError(data.message || "Invalid coupon code.");
